@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "skylight-app",
+    "name": "SkyLight",
     "slug": "skylight-app",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -19,10 +19,17 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.biobeat.skylightapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "96dab9c8-1f7c-4d92-bafb-381cf4af73cf"
+      }
+    },
+    "owner": "biobeat"
   }
 }
