@@ -1,23 +1,21 @@
 // screens/HomeScreen.js
 import React from 'react';
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, ScrollView } from 'react-native';
-// 1. Import the hook
-import { useHeaderHeight } from '@react-navigation/elements';
-// Import SafeAreaView hook if needed for bottom padding as well
-// import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import ShinyText from '../components/ShinyText'; // Ensure path is correct
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function HomeScreen({ navigation }) {
   // 2. Get the actual rendered header height
-  const headerHeight = useHeaderHeight();
-  // const insets = useSafeAreaInsets(); // Uncomment if you need bottom inset padding
+  const insets = useSafeAreaInsets();
 
   return (
     // 3. Apply top padding equal to header height to the main content container
     // Using a ScrollView allows content to scroll if it becomes too long
     <ScrollView
       style={styles.safeAreaContainer} // Use flex: 1 container style
-      contentContainerStyle={[styles.contentContainer, { paddingTop: headerHeight }]} // Apply padding here
+      contentContainerStyle={[styles.contentContainer, { paddingTop: insets.top +20,
+        paddingBottom: insets.bottom,
+      }]} // Apply padding here
       // bounces={false} // Optional: prevent bounce effect on scroll
       // showsVerticalScrollIndicator={false} // Optional: hide scroll bar
     >
@@ -79,12 +77,8 @@ const styles = StyleSheet.create({
   },
   // Style for the content INSIDE the ScrollView
   contentContainer: {
-    // paddingTop is now set dynamically
-    alignItems: 'center', // Center content horizontally
-    paddingBottom: 40, // Add padding at the bottom
-    // Ensure content can grow if needed, don't set fixed height
-    minHeight: '100%', // Try to ensure it fills height if content is short
-    justifyContent: 'space-between', // Example: Push buttons towards bottom
+    flexGrow: 1,  // Ensures ScrollView content stretches to full height
+    alignItems: 'center',
   },
   // Style for the semi-transparent overlay View
   overlay: {
@@ -122,11 +116,19 @@ const styles = StyleSheet.create({
   cardButton: {
     width: 140,
     height: 140,
-    borderRadius: 16,
+    borderRadius: 24,
     overflow: 'hidden',
     borderWidth: 2,
     borderColor: '#00ffcc',
+  
+    // 💡 Drop shadow
+    shadowColor: '#00ffcc',
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.4,
+    shadowRadius: 10,
+    elevation: 12, // for Android
   },
+  
   cardImage: {
     flex: 1,
     justifyContent: 'flex-end',
